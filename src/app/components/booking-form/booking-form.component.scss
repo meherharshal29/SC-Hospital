@@ -1,0 +1,303 @@
+@use "sass:color";
+
+$gold: #c5a059;
+$midnight: #111111;
+$white: #ffffff;
+$bg-cream: #f8f9fa;
+$border-color: #eeeeee;
+
+.booking-page {
+    min-height: 100vh;
+    display: flex;
+    background: $bg-cream;
+}
+
+.split-container {
+    display: flex;
+    width: 100%;
+
+    @media (max-width: 1024px) {
+        flex-direction: column;
+    }
+}
+
+/* LEFT SIDE IMAGE */
+.side-image {
+    flex: 0 0 40%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    min-height: 500px;
+
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba($midnight, 0.3), rgba($midnight, 0.9));
+        display: flex;
+        align-items: center;
+        padding: 60px;
+        color: $white;
+
+        .tag {
+            color: $gold;
+            letter-spacing: 4px;
+            font-weight: 800;
+            font-size: 0.7rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .gold-thin {
+            font-style: italic;
+            font-weight: 300;
+            color: $gold;
+        }
+
+        p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            max-width: 400px;
+        }
+    }
+}
+
+/* FORM SIDE */
+.side-form {
+    flex: 1;
+    padding: 80px 60px;
+    background: $white;
+
+    @media (max-width: 768px) {
+        padding: 40px 20px;
+    }
+}
+
+.form-header {
+    margin-bottom: 40px;
+
+    .gold-text {
+        color: $gold;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 3px;
+        display: block;
+    }
+
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        color: $midnight;
+        margin: 10px 0;
+    }
+
+    .gold-divider {
+        width: 60px;
+        height: 3px;
+        background: $gold;
+    }
+}
+
+/* INPUTS */
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    @media (max-width: 576px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-group {
+    margin-bottom: 25px;
+
+    label {
+        display: block;
+        font-size: 0.65rem;
+        font-weight: 800;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 10px;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid $border-color;
+        background: #fafafa;
+        font-size: 0.9rem;
+
+        &:focus {
+            outline: none;
+            border-color: $gold;
+            background: $white;
+        }
+    }
+}
+
+/* CALENDAR INTEGRATION */
+.calendar-wrapper {
+    margin-top: 40px;
+    padding: 30px;
+    background: #fbfbfb;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+
+    .section-label {
+        color: $gold;
+        font-size: 0.65rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        display: block;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+    .calendar-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .month-display {
+            text-align: center;
+
+            .m {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.5rem;
+                display: block;
+                font-weight: 700;
+            }
+
+            .y {
+                font-size: 0.7rem;
+                color: #bbb;
+                font-weight: 800;
+                letter-spacing: 4px;
+            }
+        }
+
+        button {
+            background: none;
+            border: none;
+            color: $gold;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+    }
+
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+
+        .day-h {
+            text-align: center;
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: #ddd;
+            padding-bottom: 10px;
+        }
+
+        .day-cell {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.85rem;
+
+            &.pick {
+                background: $gold;
+                color: white;
+            }
+
+            &.today {
+                color: $midnight;
+                font-weight: 500;
+            }
+
+            &.lock {
+                opacity: 0.2;
+                cursor: not-allowed;
+            }
+
+            &.inactive {
+                color: #eee;
+            }
+
+            &:hover:not(.lock) {
+                background: rgba($gold, 0.1);
+                color: $midnight;
+            }
+        }
+    }
+}
+
+.time-slots {
+    margin-top: 30px;
+
+    .slot-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+    }
+
+    .time-btn {
+        padding: 12px;
+        border: 1px solid $border-color;
+        background: white;
+        font-weight: 500;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &.active {
+            background: $gold;
+            color: white;
+            border-color: $gold;
+        }
+
+        &:disabled {
+            opacity: 0.3;
+            text-decoration: line-through;
+        }
+    }
+}
+
+.btn-confirm {
+    width: 100%;
+    padding: 20px;
+    background: $midnight;
+    color: white;
+    border: none;
+    font-weight: 500;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.4s;
+    margin-top: 40px;
+
+    &:hover:not(:disabled) {
+        background: $gold;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba($gold, 0.2);
+    }
+
+    &:disabled {
+        background: #eee;
+        color: #ccc;
+        cursor: not-allowed;
+    }
+}

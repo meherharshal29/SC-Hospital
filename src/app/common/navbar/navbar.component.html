@@ -1,0 +1,103 @@
+<header class="luxury-nav" [ngClass]="{ scrolled: isScrolled || isMenuOpen }">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="brand" routerLink="/">
+      <h1 class="m-0 fw-bolder">
+        <span class="brand-char">S</span><span class="brand-char">p</span
+        ><span class="brand-char">a</span><span class="brand-char">r</span
+        ><span class="brand-char">s</span><span class="brand-char">h</span>
+        <span class="brand-char">&nbsp;</span>
+        <span class="brand-char clinic-accent">C</span
+        ><span class="brand-char clinic-accent">l</span
+        ><span class="brand-char clinic-accent">i</span
+        ><span class="brand-char clinic-accent">n</span
+        ><span class="brand-char clinic-accent">i</span
+        ><span class="brand-char clinic-accent">c</span>
+      </h1>
+    </div>
+
+    <nav class="d-none d-lg-block">
+      <ul class="desktop-links m-0 p-0">
+        <li>
+          <a
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a routerLink="/treatments" routerLinkActive="active">Treatments</a>
+        </li>
+        <li>
+          <a routerLink="/appointment-status" routerLinkActive="active"
+            >STATUS <span class="status-dot"></span
+          ></a>
+        </li>
+        <li>
+          <a routerLink="/specialists" routerLinkActive="active">Specialists</a>
+        </li>
+        <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
+        <li>
+          <button class="btn-nav-gold" routerLink="/appointment-booking">
+            BOOK NOW
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <div
+      class="menu-trigger d-lg-none"
+      (click)="toggleMenu()"
+      [ngClass]="{ active: isMenuOpen }"
+    >
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+</header>
+
+<div
+  class="sidebar-wrapper"
+  [ngClass]="{ open: isMenuOpen }"
+  (click)="toggleMenu()"
+>
+  <aside class="sidebar-inner" (click)="$event.stopPropagation()">
+    <div class="sidebar-header">
+      <span class="gold-text">SPARSH SKIN AND HAIR CLINIC</span>
+      <div class="sidebar-close-btn" (click)="toggleMenu()">
+        <span class="close-line"></span>
+        <span class="close-line"></span>
+      </div>
+    </div>
+
+    <ul class="mobile-nav">
+      <li class="mobile-item">
+        <a routerLink="/" (click)="toggleMenu()">The Clinic</a>
+      </li>
+      <li class="mobile-item">
+        <a routerLink="/appointment-status" (click)="toggleMenu()">
+          Appointment Status <span class="status-dot"></span>
+        </a>
+      </li>
+      <li class="mobile-item">
+        <a routerLink="/treatments" (click)="toggleMenu()">Skin Aesthetics</a>
+      </li>
+      <li class="mobile-item">
+        <a routerLink="/treatments" (click)="toggleMenu()">Hair Restoration</a>
+      </li>
+      <li class="mobile-item">
+        <a routerLink="/treatments" (click)="toggleMenu()">Anti-Aging</a>
+      </li>
+
+      <li class="mobile-item mt-5 pt-3">
+        <button
+          class="btn-nav-gold w-100"
+          routerLink="/appointment-booking"
+          (click)="toggleMenu()"
+        >
+          BOOK CONSULTATION
+        </button>
+      </li>
+    </ul>
+  </aside>
+</div>

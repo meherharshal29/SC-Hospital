@@ -1,0 +1,25 @@
+<section class="services-section">
+  <div class="container">
+    <div class="section-intro">
+      <span class="gold-tag">OUR EXPERTISE</span>
+      <h2 class="display-serif">Specialized Clinical Care</h2>
+      <div class="gold-line"></div>
+    </div>
+
+    <div class="grid-container">
+      <div class="service-card" *ngFor="let service of services">
+        <div class="card-inner">
+          <div class="icon-box">
+            <i class="bi" [ngClass]="service.icon"></i>
+          </div>
+          <span class="card-subtitle">{{ service.subtitle }}</span>
+          <h3 class="card-title">{{ service.title }}</h3>
+          <p class="card-text">{{ service.description }}</p>
+          <a href="#" class="learn-more">
+            EXPLORE SERVICE <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

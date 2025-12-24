@@ -1,0 +1,247 @@
+$bg-deep: #0d0f12;
+$bg-card: #16191d;
+$champagne: #c5a059;
+$text-white: #ffffff;
+$text-muted: #94a3b8;
+$glass: rgba(255, 255, 255, 0.03);
+
+@mixin transition {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.luxury-footer {
+    background-color: $bg-deep;
+    color: $text-white;
+    padding: 80px 0 40px;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba($champagne, 0.2);
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -150px;
+        left: 50%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba($champagne, 0.05) 0%, transparent 70%);
+        transform: translateX(-50%);
+        pointer-events: none;
+    }
+
+    .footer-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 25px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .footer-main-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 60px;
+
+        // Tablet: 2 Columns
+        @media (max-width: 1024px) {
+            grid-template-columns: 1fr 1fr;
+            gap: 50px 30px;
+        }
+
+        // Mobile: 1 Column
+        @media (max-width: 650px) {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 45px;
+        }
+    }
+
+    .logo-main {
+        display: block;
+        font-family: 'Playfair Display', serif;
+        font-size: 2.2rem;
+        letter-spacing: 4px;
+        background: linear-gradient(135deg, #fff 0%, $champagne 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1.1;
+    }
+
+    .logo-sub {
+        font-size: 0.65rem;
+        letter-spacing: 5px;
+        color: $champagne;
+        font-weight: 700;
+        text-transform: uppercase;
+        display: block;
+        margin-top: 8px;
+    }
+
+    .dr-profile {
+        margin: 25px 0;
+
+        .dr-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .dr-credentials {
+            font-size: 0.7rem;
+            color: $champagne;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .dr-bio {
+            font-size: 0.9rem;
+            color: $text-muted;
+            line-height: 1.6;
+
+            @media (max-width: 650px) {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    .segment-title {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 25px;
+        padding-bottom: 12px;
+        position: relative;
+        font-weight: 700;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 35px;
+            height: 2px;
+            background: $champagne;
+        }
+
+        @media (max-width: 650px) {
+            &::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+
+    .segment-links {
+        list-style: none;
+        padding: 0;
+
+        li {
+            margin-bottom: 12px;
+
+            a {
+                color: $text-muted;
+                text-decoration: none;
+                font-size: 0.95rem;
+                @include transition;
+
+                &:hover {
+                    color: $champagne;
+                    padding-left: 5px;
+                }
+            }
+        }
+    }
+
+    .branch-card {
+        background: $bg-card;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid rgba($text-white, 0.05);
+        text-align: left; // Keeps text left-aligned inside cards even on mobile centering
+
+        .contact-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            color: $text-muted;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            i {
+                color: $champagne;
+                font-size: 1rem;
+                flex-shrink: 0;
+            }
+        }
+
+        @media (max-width: 650px) {
+            max-width: 350px;
+            margin: 0 auto;
+        }
+    }
+
+    .social-glass {
+        display: flex;
+        gap: 15px;
+
+        @media (max-width: 650px) {
+            justify-content: center;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: $glass;
+            border: 1px solid rgba($text-white, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $text-white;
+            @include transition;
+
+            &:hover {
+                background: $champagne;
+                color: $bg-deep;
+                transform: translateY(-3px);
+            }
+        }
+    }
+
+    .footer-bottom-bar {
+        margin-top: 50px;
+        padding-top: 25px;
+        border-top: 1px solid rgba($text-white, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.75rem;
+        color: $text-muted;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .bottom-links {
+            display: flex;
+            gap: 20px;
+
+            a {
+                color: $text-muted;
+                text-decoration: none;
+
+                &:hover {
+                    color: $champagne;
+                }
+            }
+        }
+    }
+}

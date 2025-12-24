@@ -1,0 +1,114 @@
+<section class="booking-split-page">
+  <div class="split-container">
+    <div
+      class="brand-side"
+      [style.background-image]="'url(assets/img/woman-applying-cream-face.jpg)'"
+    >
+      <div class="content-overlay">
+        <div class="brand-content">
+          <span class="gold-tag">EST. 2025</span>
+          <h2 class="display-serif">
+            Your Path to <br /><span class="gold-thin">Radiant Skin</span>
+          </h2>
+          <p>
+            Schedule your professional consultation with Dr. Harshal Rewatkar.
+          </p>
+          <div class="clinic-badges">
+            <span class="badge-item"
+              ><i class="bi bi-shield-check"></i> Certified Care</span
+            >
+            <span class="badge-item"
+              ><i class="bi bi-geo-alt"></i> Nagpur & Umred</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="calendar-side">
+      <div class="calendar-wrapper-inner">
+        <div class="calendar-card-inline">
+          <div class="luxury-calendar-header">
+            <div class="date-context">
+              <span class="gold-label">APPOINTMENT SCHEDULER</span>
+              <div class="editorial-date-selector">
+                <button (click)="prevMonth()" class="nav-circle">
+                  <i class="bi bi-chevron-left"></i>
+                </button>
+                <div class="date-info">
+                  <h3 class="view-month">{{ viewDate | date : "MMMM" }}</h3>
+                  <span class="view-year">{{ viewDate | date : "yyyy" }}</span>
+                </div>
+                <button (click)="nextMonth()" class="nav-circle">
+                  <i class="bi bi-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="branch-panel">
+              <label class="panel-label">SELECT CLINIC BRANCH</label>
+              <div class="custom-select-box">
+                <select (change)="onBranchChange($event)">
+                  <option value="nagpur">Nagpur: Reshimbagh Square</option>
+                  <option value="umred">Umred: Bypass Square</option>
+                </select>
+                <i class="bi bi-caret-down-fill"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="calendar-grid">
+            <div class="day-name" *ngFor="let day of weekDays">
+              {{ day[0] }}
+            </div>
+            <div
+              class="date-cell"
+              *ngFor="let date of dates"
+              (click)="selectDate(date)"
+              [ngClass]="{
+                inactive: !date.currentMonth,
+                today: date.isToday,
+                selected: date.isSelected,
+                disabled: date.isFull
+              }"
+            >
+              <span class="date-num">{{ date.day }}</span>
+              <div
+                class="status-dot"
+                *ngIf="date.currentMonth && !date.isFull"
+              ></div>
+            </div>
+          </div>
+
+          <div class="slots-wrapper" *ngIf="selectedDate">
+            <div class="slots-header">
+              <i class="bi bi-clock-history"></i> Available Slots:
+              {{ selectedDate | date : "dd MMM" }}
+            </div>
+            <div class="slots-grid">
+              <button
+                *ngFor="let slot of availableSlots"
+                [disabled]="slot.booked"
+                [class.active]="selectedSlot === slot.time"
+                (click)="selectSlot(slot.time)"
+                class="slot-btn"
+              >
+                {{ slot.time }}
+              </button>
+            </div>
+          </div>
+
+          <div class="calendar-footer">
+            <button
+              class="btn-confirm-luxury"
+              [disabled]="!selectedSlot"
+              (click)="finalizeBooking()"
+            >
+              FINALIZE APPOINTMENT <i class="bi bi-arrow-right-short"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

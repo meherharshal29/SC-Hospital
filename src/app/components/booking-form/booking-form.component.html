@@ -1,0 +1,138 @@
+<section class="booking-page">
+  <div class="split-container">
+    <div
+      class="side-image"
+      [style.background-image]="
+        'url(assets/img/woman-doing-herself-scalp-massage.jpg)'
+      "
+    >
+      <div class="overlay">
+        <div class="brand-box">
+          <span class="tag">SPARSH CLINIC</span>
+          <h2 class="display-serif">
+            Your Journey to <br /><span class="gold-thin"
+              >Perfection Begins.</span
+            >
+          </h2>
+          <p>
+            Book your personalized clinical consultation with Dr. Harshal
+            Rewatkar.
+          </p>
+          <div class="clinic-badges">
+            <span class="badge-item"
+              ><i class="bi bi-shield-check"></i> Certified Care</span
+            >
+            <span class="badge-item"
+              ><i class="bi bi-geo-alt"></i> Nagpur & Umred</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-form">
+      <header class="form-header">
+        <span class="gold-text">SECURE YOUR SLOT</span>
+        <h1>Appointment Booking</h1>
+        <div class="gold-divider"></div>
+      </header>
+
+      <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+        <div class="input-row">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input
+              type="text"
+              formControlName="fullName"
+              placeholder="Enter name"
+            />
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input
+              type="tel"
+              formControlName="phoneNo"
+              placeholder="10 Digit Number"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Clinic Branch</label>
+          <select formControlName="branch">
+            <option value="nagpur">Nagpur (Reshimbagh Square)</option>
+            <option value="umred">Umred (Bypass Square)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Treatment Type</label>
+          <select formControlName="treatmentType">
+            <option value="" disabled selected>Choose a category</option>
+            <option *ngFor="let cat of categories" [value]="cat">
+              {{ cat }}
+            </option>
+          </select>
+        </div>
+
+        <div class="calendar-wrapper">
+          <label class="section-label">SELECT DATE & TIME</label>
+
+          <div class="calendar-nav">
+            <button type="button" (click)="prevMonth()">
+              <i class="bi bi-arrow-left"></i>
+            </button>
+            <div class="month-display">
+              <span class="m">{{ viewDate | date : "MMMM" }}</span>
+              <span class="y">{{ viewDate | date : "yyyy" }}</span>
+            </div>
+            <button type="button" (click)="nextMonth()">
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+
+          <div class="calendar-grid">
+            <div class="day-h" *ngFor="let day of weekDays">{{ day[0] }}</div>
+            <div
+              class="day-cell"
+              *ngFor="let date of dates"
+              (click)="selectDate(date)"
+              [ngClass]="{
+                inactive: !date.currentMonth,
+                pick: date.isSelected,
+                today: date.isToday,
+                lock: date.isFull
+              }"
+            >
+              {{ date.day }}
+            </div>
+          </div>
+
+          <div class="time-slots" *ngIf="selectedDate">
+            <div class="slot-grid">
+              <button
+                type="button"
+                *ngFor="let slot of availableSlots"
+                [disabled]="slot.booked"
+                [class.active]="selectedSlot === slot.time"
+                (click)="pickSlot(slot.time)"
+                class="time-btn"
+              >
+                {{ slot.time }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn-confirm"
+          [disabled]="!bookingForm.valid || !selectedSlot"
+        >
+          CONFIRM APPOINTMENT NOW
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

@@ -1,0 +1,37 @@
+<section class="treatment-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="sub-title">Advanced Care</span>
+      <h2 class="main-title">Our Specialized Treatments</h2>
+      <p class="section-desc">
+        Combining medical expertise with state-of-the-art technology to provide
+        personalized solutions for your skin and hair concerns.
+      </p>
+    </div>
+
+    <div class="treatment-grid">
+      <div class="treatment-card" *ngFor="let service of treatments">
+        <div class="card-image">
+          <img [src]="service.image" [alt]="service.title" />
+          <div class="image-overlay"></div>
+          <div class="category-tag">{{ service.category }}</div>
+        </div>
+
+        <div class="card-content">
+          <div class="icon-box">
+            <i [class]="service.icon"></i>
+          </div>
+          <h3 class="treatment-title">{{ service.title }}</h3>
+          <p class="treatment-text">{{ service.description }}</p>
+
+          <a [routerLink]="['/treatment', service.id]" class="learn-more">
+            <span>Explore Treatment</span>
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

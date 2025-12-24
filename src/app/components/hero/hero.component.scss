@@ -1,0 +1,163 @@
+@use "sass:color";
+
+// Theme Variables
+$gold: #c5a059;
+$midnight: #222;
+$text-grey: #666;
+$white-glass: rgba(255, 255, 255, 0.9);
+
+.hero-wrapper {
+    width: 100%;
+    height: 90vh; // Leaves room for the service cards below
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.hero-main {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.split-panel {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 1.5s ease;
+    }
+
+    &:hover img {
+        transform: scale(1.05);
+    }
+}
+
+.content-card {
+    position: absolute;
+    bottom: 15%;
+    left: 0;
+    background-color: $white-glass;
+    backdrop-filter: blur(10px);
+    padding: 2.5rem 4rem 2.5rem 3rem;
+    min-width: 350px;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+    border-left: 5px solid $gold; // Luxury side accent
+
+    .title {
+        font-family: 'Times New Roman', serif; // Professional Clinic Look
+        font-size: 3rem;
+        font-weight: 400;
+        color: $midnight;
+        line-height: 1.1;
+        margin: 0;
+
+        .amp {
+            color: $gold; // Your signature teal
+        }
+
+        .perfection {
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+    }
+
+    .subtitle {
+        font-family: 'Montserrat', sans-serif;
+        letter-spacing: 4px;
+        font-size: 0.9rem;
+        color: $text-grey;
+        margin-top: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    // --- NEW BUTTON DESIGN ---
+    .action-area {
+        margin-top: 2rem;
+        display: flex;
+
+        .btn-hero-book {
+            background-color: $midnight;
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+
+            i {
+                transition: transform 0.3s ease;
+                font-size: 1.1rem;
+            }
+
+            &:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 25px rgba($gold, 0.3);
+
+                i {
+                    transform: translateX(5px);
+                }
+            }
+        }
+    }
+}
+
+// Tablet and Mobile Adjustments
+@media (max-width: 992px) {
+    .content-card {
+        padding: 1.5rem 2rem;
+        bottom: 10%;
+        min-width: 300px;
+
+        .title {
+            font-size: 2.2rem;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-main {
+        flex-direction: column;
+    }
+
+    .hero-wrapper {
+        height: auto;
+    }
+
+    .split-panel {
+        height: 50vh;
+    }
+
+    .content-card {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 2.5rem 1.5rem;
+        border-left: none;
+        border-top: 5px solid $gold;
+
+        .action-area {
+            justify-content: center;
+
+            .btn-hero-book {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+    }
+}

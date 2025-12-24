@@ -1,0 +1,300 @@
+@use "sass:color";
+
+// LUXURY BRAND PALETTE
+$midnight: #111111;
+$gold: #c5a059;
+$white: #ffffff;
+$green-live: #28a745;
+$border-light: #f5f5f5;
+$transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+/* --- 1. KEYFRAMES --- */
+@keyframes pulse-green {
+    0% {
+        transform: scale(0.9);
+        box-shadow: 0 0 0 0 rgba($green-live, 0.6);
+    }
+
+    70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 8px rgba($green-live, 0);
+    }
+
+    100% {
+        transform: scale(0.9);
+        box-shadow: 0 0 0 0 rgba($green-live, 0);
+    }
+}
+
+/* --- 2. MAIN NAVBAR --- */
+.luxury-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 15px 0;
+    background: $white;
+    transition: $transition-smooth;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+
+    .brand h1 {
+        color: $midnight;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.7rem;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+
+        .clinic-accent {
+            color: $gold;
+        }
+    }
+
+    &.scrolled {
+        padding: 10px 0;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+}
+
+/* --- 3. DESKTOP LINKS --- */
+.desktop-links {
+    display: flex;
+    list-style: none;
+    gap: 35px;
+    align-items: center;
+
+    li a {
+        color: $midnight !important;
+        text-decoration: none;
+        font-weight: 500;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        position: relative;
+        padding: 8px 0;
+        transition: 0.3s;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: $gold;
+            transition: 0.4s ease;
+            transform: translateX(-50%);
+        }
+
+        &:hover,
+        &.active {
+            color: $gold !important;
+
+            &::after {
+                width: 100%;
+            }
+        }
+    }
+}
+
+/* --- 4. STATUS INDICATOR --- */
+.status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: $green-live;
+    border-radius: 50%;
+    margin-left: 8px;
+    animation: pulse-green 2s infinite;
+}
+
+/* --- 5. BUTTON STYLING (REUSABLE) --- */
+.btn-nav-gold {
+    background: $gold;
+    color: $white;
+    border: none;
+    padding: 12px 28px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: 0.4s;
+    cursor: pointer;
+    border-radius: 2px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        background: $midnight;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* --- 6. MOBILE TRIGGER (HAMBURGER) --- */
+.menu-trigger {
+    width: 28px;
+    height: 12px;
+    position: relative;
+    cursor: pointer;
+
+    .line {
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: $midnight;
+        transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+        &:nth-child(1) {
+            top: 0;
+        }
+
+        &:nth-child(2) {
+            bottom: 0;
+            width: 65%;
+            right: 0;
+        }
+    }
+
+    &.active .line {
+        background: $gold !important;
+        width: 100% !important;
+
+        &:nth-child(1) {
+            transform: rotate(45deg);
+            top: 5px;
+        }
+
+        &:nth-child(2) {
+            transform: rotate(-45deg);
+            bottom: 5px;
+        }
+    }
+}
+
+/* --- 7. MOBILE SIDEBAR DRAWER --- */
+.sidebar-wrapper {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 2100;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.4s;
+    backdrop-filter: blur(8px);
+
+    &.open {
+        opacity: 1;
+        visibility: visible;
+
+        .sidebar-inner {
+            transform: translateX(0);
+        }
+    }
+}
+
+.sidebar-inner {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    max-width: 350px;
+    height: 100vh;
+    background: $white;
+    transform: translateX(100%);
+    transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -15px 0 40px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+
+    /* Sidebar Header with Close Icon */
+    .sidebar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 40px 30px 20px;
+        border-bottom: 1px solid $border-light;
+
+        .gold-text {
+            color: $gold;
+            letter-spacing: 4px;
+            font-weight: 800;
+            font-size: 0.65rem;
+        }
+    }
+
+    .sidebar-close-btn {
+        width: 24px;
+        height: 24px;
+        position: relative;
+        cursor: pointer;
+
+        .close-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: $midnight;
+            top: 50%;
+
+            &:nth-child(1) {
+                transform: rotate(45deg);
+            }
+
+            &:nth-child(2) {
+                transform: rotate(-45deg);
+            }
+        }
+
+        &:hover .close-line {
+            background: $gold;
+        }
+    }
+
+    /* Mobile Navigation Links */
+    .mobile-nav {
+        list-style: none;
+        padding: 10px 0;
+        margin: 0;
+        overflow-y: auto;
+        flex: 1;
+
+        .mobile-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+
+            a {
+                padding: 20px 30px;
+                font-size: 1.2rem;
+                color: $midnight;
+                text-decoration: none;
+                font-family: 'Playfair Display', serif;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                transition: 0.3s;
+
+                &:hover {
+                    color: $gold;
+                    background: #fafafa;
+                }
+            }
+
+            // Proper button display for mobile
+            &.mt-5 {
+                margin-top: 3rem !important;
+                padding: 0 30px;
+                border: none;
+
+                .btn-nav-gold {
+                    width: 100%;
+                    padding: 16px; // Larger touch area for mobile
+                    font-size: 0.85rem;
+                }
+            }
+        }
+    }
+}
+
+/* --- 8. BODY LOCK --- */
+:host ::ng-deep .no-scroll {
+    overflow: hidden !important;
+}
